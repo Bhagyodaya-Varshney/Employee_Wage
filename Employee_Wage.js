@@ -10,6 +10,10 @@ let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empDailyWagearr = new Array();
 let empCheck = Math.floor(Math.random()* 10) % 2;
+const NUM_OF_WORKING_DAYS = 20;
+let empDailyWageArr = new Array();
+let empDailyWageMap = new Map();
+
 if(empCheck == IS_Absent){
     console.log("Employee is Absent");
     return;
@@ -38,8 +42,11 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < Num_OF_WORKING_DAYS
     empCheck = Math.floor(Math.random()* 10) % 3;
     let empHrs = getWorkingHours(empCheck)
     totalEmpHrs += empHrs
+    empDailyWageMap.set(totalWorkingDays , calcDailyWage(empHrs))
     empDailyWagearr.push(calcDailyWage(empHrs))
 }
+
+
 
 let totalEmpWage = 0;
 function sum(dailwage) {
@@ -103,3 +110,10 @@ function totalDaysWorked(numOfDays, dailyWage) {
 }
 
 console.log("UC 7G - Number of Days Employee Worked : " + empDailyWagearr.reduce(totalDaysWorked, 0));
+
+console.log(empDailyWageMap);
+function totalwages(totalWage , dailyWage) {
+    return totalWage + dailyWage;
+}
+
+console.log("UC8A - EMp Wage Map totalHrs:- " + Array.from(empDailyWageMap.values()).reduce(totalwages , 0));
